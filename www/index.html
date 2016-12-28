@@ -31,58 +31,78 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/scan.js"></script>
+    <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
+    <script src="js/conecta.js"></script>
   </head>
   <body ng-app="starter">
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">Tarjetas bancarias</h1>
       </ion-header-bar>
       <ion-content>
-        <button class="button" onclick="escan();">Escanear tarjeta</button>
+
+        <div class="card">
+          <div class="item item-divider item-icon-left">
+            <i class="icon ion-person"></i>
+            Información personal
+          </div>
+
+          <div class="item item-text-wrap">
+            <div class="list">
+              <label class="item item-input">
+                <input id="nombre" type="text" placeholder="Nombre">
+              </label>
+              <label class="item item-input">
+                <input id="direccion" type="text" placeholder="Dirección">
+              </label>
+              <label class="item item-input">
+                <input id="ciudad" type="text" placeholder="Ciudad">
+              </label>
+              <label class="item item-input">
+                <input id="cp" type="text" placeholder="Código Postal">
+              </label>
+            </div>
+          </div>
+
+
+          <div class="item item-divider item-icon-left">
+            <i class="icon ion-card"></i>
+            Información Bancaria
+          </div>
+
+          <div class="item item-text-wrap">
+            <div class="list">
+              <label class="item item-input">
+                <input id="tarjeta" type="text" placeholder="Número de tarjeta">
+              </label>
+              <label class="item item-input">
+                <input id="mes" type="number" placeholder="Mes">
+                <input id="anio" type="number" placeholder="Año">
+                <input id="cvc" type="number" placeholder="CVC">
+              </label>
+              <label class="item item-input">
+                <span id="brand" class="input-label">   </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="item item-divider">
+            <div class="button-bar">
+              <a class="button icon-left ion-qr-scanner button-clear button-dark" onclick="escan();">Escaner</a>
+              <a class="button icon-left ion-checkmark-round button-clear button-dark">Aceptar</a>
+            </div>
+          </div>
+          
+        </div>
+
         <div id="resultado"></div>
+
       </ion-content>
+      <ion-footer-bar class="bar-calm">
+          <h3 class="title">Mariachi.io</h3>
+      </ion-footer-bar>
     </ion-pane>
-    <script type="text/javascript">
-      var salida = "";
-      var cardIOResponseFields = [
-        "card_type",
-        "redacted_card_number",
-        "card_number",
-        "expiry_month",
-        "expiry_year",
-        "cvv",
-        "zip"
-      ];
-
-      function onCardIOComplete(response)  
-      {
-        salida="card.io scan complete...";
-        for (var i = 0, len = cardIOResponseFields.length; i < len; i++) {
-          var field = cardIOResponseFields[i];
-          salida = salida + "</br>"+ field + ": " + response[field];
-        }
-        document.getElementById("resultado").innerHTML = salida;
-      };
-
-      function onCardIOCancel () {
-        document.getElementById("resultado").innerHTML = "card.io scan cancelled";
-      };
-
-      function escan()
-      {
-        document.getElementById("resultado").innerHTML = "Clicked";
-        CardIO.scan({
-                  "expiry": true,
-                  "cvv": true,
-                  "zip": false,
-                  "suppressManual": false,
-                  "suppressConfirm": false,
-                  "hideLogo": true
-              },
-              onCardIOComplete,
-              onCardIOCancel);
-      }
-    </script>
   </body>
 </html>
