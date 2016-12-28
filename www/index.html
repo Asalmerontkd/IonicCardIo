@@ -61,7 +61,7 @@
                 <input id="ciudad" type="text" placeholder="Ciudad">
               </label>
               <label class="item item-input">
-                <input id="cp" type="text" placeholder="Código Postal">
+                <input id="cp" type="number" placeholder="Código Postal">
               </label>
             </div>
           </div>
@@ -80,7 +80,7 @@
               <label class="item item-input">
                 <input id="mes" type="number" placeholder="Mes">
                 <input id="anio" type="number" placeholder="Año">
-                <input id="cvc" type="number" placeholder="CVC">
+                <input id="cvv" type="number" placeholder="CVV">
               </label>
               <label class="item item-input">
                 <span id="brand" class="input-label">   </span>
@@ -91,7 +91,7 @@
           <div class="item item-divider">
             <div class="button-bar">
               <a class="button icon-left ion-qr-scanner button-clear button-dark" onclick="escan();">Escaner</a>
-              <a class="button icon-left ion-checkmark-round button-clear button-dark">Aceptar</a>
+              <a class="button icon-left ion-checkmark-round button-clear button-dark" onclick="validarCampos();">Aceptar</a>
             </div>
           </div>
           

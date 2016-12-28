@@ -3,7 +3,7 @@ function onCardIOComplete(response)
   document.getElementById("tarjeta").value = response["redacted_card_number"];
   document.getElementById("mes").value = response["expiry_month"];
   document.getElementById("anio").value = response["expiry_year"];
-  document.getElementById("cvc").value = response["cvv"];
+  document.getElementById("cvv").value = response["cvv"];
   document.getElementById("brand").innerHTML = response["card_type"];
 };
 
@@ -23,4 +23,4 @@ function escan()
         },
         onCardIOComplete,
         onCardIOCancel);
-}
+};
