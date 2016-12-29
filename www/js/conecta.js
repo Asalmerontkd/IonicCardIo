@@ -1,4 +1,4 @@
-Conekta.setPublishableKey("key");
+Conekta.setPublishableKey("key_");
 var nombre, direccion, ciudad, cp, tarjeta, mes, anio, cvv;
 
 function validarCampos()
@@ -20,12 +20,12 @@ function validarCampos()
 		}
 		else
 		{
-			window.plugins.toast.showLongBottom("Los datos bancarios no pueden estar vacios.");
+			mensajeToastLong("Los datos bancarios no pueden estar vacios.");
 		}
 	}
 	else
 	{
-		window.plugins.toast.showLongBottom("Los campos de la información personal no pueden estar vacios.");
+		mensajeToastLong("Los campos de la información personal no pueden estar vacios.");
 	}
 
 	
@@ -65,5 +65,38 @@ function validarTarjeta()
 
 function tokenizarTarjeta()
 {
-	window.plugins.toast.showLongBottom("Correcto!!!");
+	var tokenParams = {
+	  "card": {
+	    "number": tarjeta,
+	    "name": nombre,
+	    "exp_year": anio,
+	    "exp_month": mes,
+	    "cvc": cvv,
+	    "address": {
+	        "street1": direccion,
+	        "city": ciudad,
+	        "zip": cp
+	     }
+	  }
+	};
+
+	Conekta.token.create(tokenParams, successResponseHandler, errorResponseHandler);
+}
+
+function successResponseHandler(token)
+{
+	document.getElementById("resultado").innerHTML = "Objeto: " + token.object + "</br>"
+													+ "id: " + token.id + "</br>"
+													+ "live mode: " + token.livemode + "</br>"
+													+ "usado: " + token.used;
+	mensajeToastLong("Token creado: " + token.id);
+}
+
+function errorResponseHandler(error)
+{
+	document.getElementById("resultado").innerHTML = "Objeto: " + error.object + "</br>"
+													+ "tipo: " + error.type + "</br>"
+													+ "mensaje: " + error.message + "</br>"
+													+ "mensaje a comprador: " + error.message_to_purchaser;
+	mensajeToastLong("Error: " + error.message);
 }

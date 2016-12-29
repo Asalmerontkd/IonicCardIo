@@ -8,7 +8,7 @@ function onCardIOComplete(response)
 }
 
 function onCardIOCancel() {
-  window.plugins.toast.showLongBottom("Scan cancelled.");
+  mensajeToastLong("Scan cancelled.");
 }
 
 function escan()
