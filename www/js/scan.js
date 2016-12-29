@@ -5,14 +5,18 @@ function onCardIOComplete(response)
   document.getElementById("anio").value = response["expiry_year"];
   document.getElementById("cvv").value = response["cvv"];
   document.getElementById("brand").innerHTML = response["card_type"];
-};
+}
 
 function onCardIOCancel() {
-  document.getElementById("resultado").innerHTML = "card scan cancelled";
-};
+  window.plugins.toast.showLongBottom("Scan cancelled.");
+}
 
 function escan()
 {
+  cambiarColorLetra("tarjeta", "black");
+  cambiarColorLetra("mes", "black");
+  cambiarColorLetra("anio", "black");
+  cambiarColorLetra("cvv", "black");
   CardIO.scan({
             "expiry": true,
             "cvv": true,
@@ -23,4 +27,4 @@ function escan()
         },
         onCardIOComplete,
         onCardIOCancel);
-};
+}

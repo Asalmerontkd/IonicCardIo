@@ -1,3 +1,4 @@
+Conekta.setPublishableKey("key");
 var nombre, direccion, ciudad, cp, tarjeta, mes, anio, cvv;
 
 function validarCampos()
@@ -15,7 +16,7 @@ function validarCampos()
 	{
 		if (tarjeta.length>0 && mes.length>0 && anio.length>0 && cvv.length>0) 
 		{
-			window.plugins.toast.showLongBottom("Todo correcto");
+			validarTarjeta();
 		}
 		else
 		{
@@ -28,5 +29,41 @@ function validarCampos()
 	}
 
 	
-};
+}
 
+function validarTarjeta()
+{
+	var flag = true;
+	if (!Conekta.card.validateNumber(tarjeta)) 
+	{
+		flag = false;
+		cambiarColorLetra("tarjeta", "red");
+	}
+
+	if (!Conekta.card.validateExpirationDate(mes, anio)) 
+	{
+		flag = false;
+		cambiarColorLetra("mes", "red");
+		cambiarColorLetra("anio", "red");
+	}
+
+	if (!Conekta.card.validateCVC(cvv)) 
+	{
+		flag = false;
+		cambiarColorLetra("cvv", "red");
+	}
+
+	if (flag) 
+	{
+		cambiarColorLetra("tarjeta", "green");
+		cambiarColorLetra("mes", "green");
+		cambiarColorLetra("anio", "green");
+		cambiarColorLetra("cvv", "green");
+		tokenizarTarjeta();
+	}
+}
+
+function tokenizarTarjeta()
+{
+	window.plugins.toast.showLongBottom("Correcto!!!");
+}
