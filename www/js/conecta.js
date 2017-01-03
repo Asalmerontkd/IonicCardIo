@@ -1,4 +1,4 @@
-Conekta.setPublishableKey("key_");
+Conekta.setPublishableKey("key_ARBFxxVsqhNQ6KzWPDsXhhw");
 var nombre, direccion, ciudad, cp, tarjeta, mes, anio, cvv;
 
 function validarCampos()
@@ -97,6 +97,7 @@ function errorResponseHandler(error)
 	document.getElementById("resultado").innerHTML = "Objeto: " + error.object + "</br>"
 													+ "tipo: " + error.type + "</br>"
 													+ "mensaje: " + error.message + "</br>"
-													+ "mensaje a comprador: " + error.message_to_purchaser;
+													+ "mensaje a comprador: " + error.message_to_purchaser + "</br>"
+													+ "Codigo de error" + error.error_code;
 	mensajeToastLong("Error: " + error.message);
 }
